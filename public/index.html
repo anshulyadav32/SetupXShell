@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetupX Authentication</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            margin: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .icon {
+            font-size: 48px;
+            color: #6366F1;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #1F2937;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #6B7280;
+            font-size: 16px;
+        }
+        
+        .auth-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .method {
+            padding: 15px 20px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .method:hover {
+            border-color: #6366F1;
+            background-color: #F3F4F6;
+            transform: translateY(-2px);
+        }
+        
+        .method.email {
+            background-color: #6366F1;
+            color: white;
+            border-color: #6366F1;
+        }
+        
+        .method.google {
+            border-color: #4285F4;
+            color: #4285F4;
+        }
+        
+        .method.phone {
+            border-color: #10B981;
+            color: #10B981;
+        }
+        
+        .method.otp {
+            border-color: #F59E0B;
+            color: #F59E0B;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .status.success {
+            background-color: #D1FAE5;
+            color: #065F46;
+            border: 1px solid #A7F3D0;
+        }
+        
+        .status.info {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+            border: 1px solid #93C5FD;
+        }
+        
+        .demo-note {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #FEF3C7;
+            border: 1px solid #FCD34D;
+            border-radius: 8px;
+            color: #92400E;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="icon">🔐</div>
+            <h1>SetupX Authentication</h1>
+            <p class="subtitle">Secure authentication system with multiple methods</p>
+        </div>
+        
+        <div class="auth-methods">
+            <a href="#" class="method email" onclick="handleAuth('email')">
+                <span>📧</span>
+                Email/Password Authentication
+            </a>
+            
+            <a href="#" class="method google" onclick="handleAuth('google')">
+                <span>🔍</span>
+                Continue with Google
+            </a>
+            
+            <a href="#" class="method phone" onclick="handleAuth('phone')">
+                <span>📱</span>
+                Phone Number Authentication
+            </a>
+            
+            <a href="#" class="method otp" onclick="handleAuth('otp')">
+                <span>📬</span>
+                Email OTP Authentication
+            </a>
+        </div>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div class="demo-note">
+            <strong>Demo Mode:</strong> This is a demonstration of the authentication system. 
+            In production, this would connect to Firebase Authentication.
+        </div>
+    </div>
+
+    <script>
+        function handleAuth(method) {
+            const status = document.getElementById('status');
+            status.style.display = 'block';
+            
+            switch(method) {
+                case 'email':
+                    status.className = 'status info';
+                    status.innerHTML = '📧 Email/Password authentication would be implemented here with Firebase Auth';
+                    break;
+                case 'google':
+                    status.className = 'status info';
+                    status.innerHTML = '🔍 Google Sign-In would be implemented here with Firebase Auth';
+                    break;
+                case 'phone':
+                    status.className = 'status info';
+                    status.innerHTML = '📱 Phone authentication with SMS OTP would be implemented here';
+                    break;
+                case 'otp':
+                    status.className = 'status info';
+                    status.innerHTML = '📬 Email OTP authentication would be implemented here';
+                    break;
+            }
+            
+            // Simulate authentication success after 2 seconds
+            setTimeout(() => {
+                status.className = 'status success';
+                status.innerHTML = '✅ Authentication successful! Welcome to SetupX!';
+            }, 2000);
+        }
+        
+        // Add some animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
